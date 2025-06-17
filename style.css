@@ -1,0 +1,523 @@
+/* Asosiy sozlamalar */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+/* HEADER */
+.site-header {
+    background-color: white;
+    padding: 20px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo {
+    font-size: 28px;
+    font-weight: 800;
+    color: #007cf0;
+  }
+  
+  .main-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .main-nav a {
+    text-decoration: none;
+    font-size: 16px;
+    color: #0c1e45;
+    position: relative;
+    transition: color 0.3s ease;
+    padding: 8px 6px;
+    font-weight: 500;
+  }
+  
+  /* HOVER EFFEKTI */
+  .main-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    height: 2px;
+    width: 0%;
+    background: linear-gradient(90deg, #007cf0, #00dfd8);
+    transition: width 0.3s ease;
+  }
+  
+  .main-nav a:hover::after {
+    width: 100%;
+  }
+  
+  .main-nav a:hover {
+    color: #007cf0;
+  }
+  
+  /* KIRISH TUGMASI */
+  .login-btn {
+    background: linear-gradient(135deg, #007cf0, #00dfd8);
+    color: white !important;
+    padding: 8px 18px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+  }
+  
+  .login-btn:hover {
+    box-shadow: 0 6px 20px rgba(0, 124, 240, 0.25);
+    transform: translateY(-2px);
+  }
+  
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .main-nav ul {
+      flex-direction: column;
+      background: white;
+      position: absolute;
+      top: 80px;
+      right: 24px;
+      width: 200px;
+      padding: 20px;
+      display: none; /* burger menyu bilan ochiladi */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+  
+    /* Keyinchalik JS bilan mobil menyu qo‘shamiz */
+  }
+
+/* MENU TOGGLE (mobil) */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .navbar {
+        position: absolute;
+        top: 70px;
+        right: 20px;
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 15px;
+        flex-direction: column;
+        gap: 15px;
+        display: none;
+    }
+
+    .navbar.show {
+        display: flex;
+    }
+
+    .auth-buttons {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+}
+
+/* HERO SECTION */
+.hero {
+    padding: 120px 0;
+    background: linear-gradient(135deg, #eef7ff, #ffffff);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: -100px;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, #007cf0 0%, transparent 70%);
+    opacity: 0.1;
+    z-index: 0;
+  }
+  
+  .hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .hero-text {
+    flex: 1 1 500px;
+  }
+  
+  .hero-text h1 {
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 1.2;
+    color: #0c1e45;
+    margin-bottom: 25px;
+  }
+  
+  .hero-text p {
+    font-size: 18px;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 35px;
+    max-width: 600px;
+  }
+  
+  .hero-text .btn-primary {
+    display: inline-block;
+    padding: 14px 32px;
+    font-size: 16px;
+    border-radius: 8px;
+    background-color: #007cf0;
+    color: white;
+    text-decoration: none;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+  
+  .hero-text .btn-primary:hover {
+    background-color: #005bb5;
+    transform: translateY(-2px);
+  }
+  
+  .hero-image {
+    flex: 1 1 400px;
+    text-align: center;
+  }
+  
+  .hero-image img {
+    max-width: 100%;
+    height: auto;
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  /* Yengil animatsiya */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  /* RESPONSIVE - 768px dan kichik ekranlar uchun */
+  @media (max-width: 768px) {
+    .hero-content {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .hero-text h1 {
+      font-size: 36px;
+    }
+  
+    .hero-text p {
+      font-size: 16px;
+      margin: 0 auto 25px;
+    }
+  
+    .hero-text .btn-primary {
+      font-size: 15px;
+    }
+  }
+
+
+
+/* SERVICES */
+.services-section {
+    background-color: #f9f9f9;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.services-section h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.services-section p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 40px;
+}
+
+.services-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.service-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    width: 280px;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+}
+
+.service-card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #007cf0;
+}
+
+.service-card p {
+    font-size: 15px;
+    color: #666;
+}
+
+/* PRICING */
+.pricing-section {
+    background-color: #f0f8ff;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.pricing-section h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    color: #222;
+}
+
+.pricing-section p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 40px;
+}
+
+.pricing-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.pricing-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    padding: 30px 20px;
+    width: 260px;
+    transition: transform 0.3s ease;
+}
+
+.pricing-card:hover {
+    transform: translateY(-5px);
+}
+
+.pricing-card.featured {
+    border: 2px solid #007cf0;
+}
+
+.pricing-card h3 {
+    font-size: 24px;
+    color: #007cf0;
+}
+
+.price {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 15px 0;
+    color: #333;
+}
+
+.pricing-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.pricing-card ul li {
+    font-size: 15px;
+    margin: 10px 0;
+    color: #444;
+}
+
+.select-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007cf0;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.select-btn:hover {
+    background-color: #005fc1;
+}
+
+/* CONTACT */
+.contact-section {
+    background-color: #ffffff;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.contact-section h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    color: #222;
+}
+
+.contact-section p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.contact-form {
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    resize: none;
+}
+
+.contact-form button {
+    padding: 12px;
+    font-size: 16px;
+    background-color: #007cf0;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.contact-form button:hover {
+    background-color: #005fc1;
+}
+
+/* FOOTER */
+.footer {
+    background-color: #1c1c1c;
+    color: #f0f0f0;
+    padding: 40px 20px 20px;
+    font-size: 15px;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: auto;
+    gap: 30px;
+}
+
+.footer-logo h3 {
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+.footer-links h4,
+.footer-contact h4 {
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links ul li {
+    margin-bottom: 8px;
+}
+
+.footer-links ul li a {
+    color: #aaa;
+    text-decoration: none;
+}
+
+.footer-links ul li a:hover {
+    color: #fff;
+}
+
+.footer-contact p {
+    margin: 6px 0;
+    color: #ccc;
+}
+
+.social-icons a {
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.social-icons img {
+    width: 24px;
+    height: 24px;
+    filter: brightness(0) invert(1);
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 30px;
+    border-top: 1px solid #444;
+    padding-top: 15px;
+    color: #aaa;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .menu {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .service-cards,
+    .pricing-table {
+        flex-direction: column;
+        align-items: center;
+    }
+}

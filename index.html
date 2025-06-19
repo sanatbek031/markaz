@@ -21,6 +21,7 @@
                     <li><a href="#tariflar">Tariflar</a></li>
                     <li><a href="#boglanish">Bog‘lanish</a></li>
                     <li><a href="./login.html" class="login-btn">Kirish</a></li>
+                    <li><a href="./admin.html" class="admin-btn">Admin Panel</a></li>
                 </ul>
             </nav>
         </div>
@@ -69,7 +70,6 @@
         <p>Sizga mos bo‘lgan rejamizni tanlang:</p>
 
         <div class="pricing-container">
-            <!-- Boshlovchi -->
             <div class="pricing-card">
                 <h3>Boshlovchi</h3>
                 <p class="price">$0 / oy</p>
@@ -81,7 +81,6 @@
                 <a href="#" class="select-btn">Tanlash</a>
             </div>
 
-            <!-- O‘rta -->
             <div class="pricing-card featured">
                 <h3>O‘rta</h3>
                 <p class="price">$9 / oy</p>
@@ -93,7 +92,6 @@
                 <a href="#" class="select-btn">Tanlash</a>
             </div>
 
-            <!-- Professional -->
             <div class="pricing-card">
                 <h3>Professional</h3>
                 <p class="price">$29 / oy</p>
@@ -112,13 +110,15 @@
         <h2>Biz bilan bog‘laning</h2>
         <p>Har qanday savol yoki taklif bo‘lsa, xabar qoldiring.</p>
 
-        <form class="contact-form" action="#" method="post">
+        <form class="contact-form" action="contact.php" method="POST">
             <input type="text" name="name" placeholder="Ismingiz" required>
             <input type="email" name="email" placeholder="Email manzilingiz" required>
             <textarea name="message" rows="5" placeholder="Xabaringiz" required></textarea>
             <button type="submit">Yuborish</button>
-        </form>
+          </form>
+          
     </section>
+
     <!-- FOOTER QISMI -->
     <footer class="footer">
         <div class="footer-content">
@@ -154,6 +154,33 @@
         </div>
     </footer>
 
+    <script>
+        document.getElementById("contactForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+            const name = this.name.value.trim();
+            const email = this.email.value.trim();
+            const message = this.message.value.trim();
+
+            try {
+                const res = await fetch("http://localhost:5000/api/contact/send", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ name, email, message })
+                });
+
+                const data = await res.json();
+                if (res.ok) {
+                    alert("Xabaringiz yuborildi!");
+                    this.reset();
+                } else {
+                    alert(data.message || "Xabar yuborishda xatolik");
+                }
+            } catch (err) {
+                console.error(err);
+                alert("Server bilan bog‘lanishda xatolik yuz berdi.");
+            }
+        });
+    </script>
 </body>
 
 </html>

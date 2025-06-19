@@ -13,16 +13,53 @@
     <section class="signup-container">
         <div class="signup-box">
             <h2>Ro‘yxatdan o‘tish</h2>
-            <form>
-                <input type="text" placeholder="Ism" required />
-                <input type="email" placeholder="Email" required />
-                <input type="password" placeholder="Parol" required />
-                <input type="password" placeholder="Parolni tasdiqlang" required />
-                <button type="submit" class="btn">Yuborish</button>
-            </form>
+            <form action="register.php" method="POST">
+                <input type="text" name="username" placeholder="Ismingiz" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Parol" required>
+                <button type="submit">Ro‘yxatdan o‘tish</button>
+              </form>
+              
             <p class="login-link">Hisobingiz bormi? <a href="login.html">Kirish</a></p>
         </div>
     </section>
+
+    <script>
+        document.getElementById("registerForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const username = this.username.value.trim();
+            const email = this.email.value.trim();
+            const password = this.password.value;
+            const confirm = this.confirm.value;
+
+            if (password !== confirm) {
+                alert("Parollar mos emas!");
+                return;
+            }
+
+            try {
+                const response = await fetch("http://localhost:5000/api/auth/register", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "include",
+                    body: JSON.stringify({ username, email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert("Ro‘yxatdan o‘tish muvaffaqiyatli!");
+                    window.location.href = "login.html";
+                } else {
+                    alert(data.message || "Xatolik yuz berdi");
+                }
+            } catch (err) {
+                console.error(err);
+                alert("Server bilan bog‘lanishda muammo yuz berdi.");
+            }
+        });
+    </script>
 
 </body>
 

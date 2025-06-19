@@ -14,13 +14,41 @@
         <div class="reset-box">
             <h2>Parolni tiklash</h2>
             <p>Davom etish uchun elektron pochtangizni kiriting:</p>
-            <form>
-                <input type="email" placeholder="Email manzilingiz" required />
+            <form id="resetForm">
+                <input type="email" name="email" placeholder="Email manzilingiz" required />
                 <button type="submit" class="btn">Yuborish</button>
             </form>
             <p class="back-link"><a href="login.html">Ortga — Kirish sahifasiga</a></p>
         </div>
     </section>
+
+    <script>
+        document.getElementById("resetForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const email = this.email.value.trim();
+
+            try {
+                const response = await fetch("http://localhost:5000/api/auth/reset", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "include",
+                    body: JSON.stringify({ email })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert("Tiklash havolasi yuborildi. Emailingizni tekshiring.");
+                } else {
+                    alert(data.message || "Xatolik yuz berdi");
+                }
+            } catch (err) {
+                console.error(err);
+                alert("Server bilan bog‘lanishda xatolik yuz berdi.");
+            }
+        });
+    </script>
 
 </body>
 

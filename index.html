@@ -21,7 +21,7 @@
                     <li><a href="#tariflar">Tariflar</a></li>
                     <li><a href="#boglanish">Bog‘lanish</a></li>
                     <li><a href="./login.html" class="login-btn">Kirish</a></li>
-                    <li><a href="./admin.html" class="admin-btn">Admin Panel</a></li>
+                    <li><a href="#" class="admin-btn" onclick="admingaOtish()">Admin Panel</a></li>
                 </ul>
             </nav>
         </div>
@@ -47,7 +47,6 @@
     <section id="xizmatlar" class="services-section">
         <h2>Xizmatlarimiz</h2>
         <p>Biz quyidagi asosiy xizmatlarni taklif qilamiz:</p>
-
         <div class="services-container">
             <div class="service-card">
                 <h3> Konsultatsiya</h3>
@@ -115,8 +114,7 @@
             <input type="email" name="email" placeholder="Email manzilingiz" required>
             <textarea name="message" rows="5" placeholder="Xabaringiz" required></textarea>
             <button type="submit">Yuborish</button>
-          </form>
-          
+        </form>
     </section>
 
     <!-- FOOTER QISMI -->
@@ -155,32 +153,26 @@
     </footer>
 
     <script>
-        document.getElementById("contactForm").addEventListener("submit", async function (e) {
-            e.preventDefault();
-            const name = this.name.value.trim();
-            const email = this.email.value.trim();
-            const message = this.message.value.trim();
-
-            try {
-                const res = await fetch("http://localhost:5000/api/contact/send", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ name, email, message })
+        function admingaOtish() {
+            fetch("http://localhost:5000/api/admin/panel", {
+                method: "GET",
+                credentials: "include"
+            })
+                .then(res => res.json().then(data => ({ status: res.status, body: data })))
+                .then(result => {
+                    if (result.status === 200) {
+                        window.location.href = "./admin.html";
+                    } else {
+                        alert(result.body.message || "Sizga admin huquqi berilmagan.");
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    alert("Server bilan bog‘lanishda xatolik yuz berdi.");
                 });
-
-                const data = await res.json();
-                if (res.ok) {
-                    alert("Xabaringiz yuborildi!");
-                    this.reset();
-                } else {
-                    alert(data.message || "Xabar yuborishda xatolik");
-                }
-            } catch (err) {
-                console.error(err);
-                alert("Server bilan bog‘lanishda xatolik yuz berdi.");
-            }
-        });
+        }
     </script>
+
 </body>
 
 </html>
